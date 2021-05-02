@@ -25,6 +25,8 @@
     "@tsconfig/svelte": "^1.0.0"
   },
   "dependencies": {
+    "@esri/arcgis-rest-portal": "^3.0.5",
+    "@esri/arcgis-rest-request": "^3.0.5",
     "sirv-cli": "^1.0.0"
   }
 }
