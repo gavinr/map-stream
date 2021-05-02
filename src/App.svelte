@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { ISearchOptions, searchItems } from "@esri/arcgis-rest-portal";
+  import { searchItems } from "@esri/arcgis-rest-portal";
+  import type { ISearchOptions } from "@esri/arcgis-rest-portal";
 
   export let name: string;
 
