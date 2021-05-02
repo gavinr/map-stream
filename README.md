@@ -1,6 +1,6 @@
 # Map Stream
 
-Showing the public content being posted and updated in ArcGIS Online
+The most recently updated maps in ArcGIS Online
 
 ## Built With
 
