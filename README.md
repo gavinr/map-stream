@@ -1,6 +1,6 @@
 # Map Stream
 
-The most recently updated maps in ArcGIS Online
+The most recently updated maps in ArcGIS Online. Check it out! -> https://map-stream.gavinr.com/
 
 ## Built With
 
