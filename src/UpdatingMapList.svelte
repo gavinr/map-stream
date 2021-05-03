@@ -17,11 +17,12 @@
   const mergeItems = (newItems) => {
     if (items && items.length > 0) {
       const itemsToInsert = [];
-      const currentFirstId = items[0].id;
+      const currentFirstId = items[0].modified;
       newItems.find((item) => {
-        if (item.id === currentFirstId) {
+        if (item.modified === currentFirstId) {
           return true;
         } else {
+          item.uniqueId = Math.random();
           itemsToInsert.push(item);
           return false;
         }
@@ -34,7 +35,6 @@
   };
 
   const looper = async () => {
-    console.log("LOOP");
     const searchOptions: ISearchOptions = {
       q: '((type: "Web Map")) AND NOT type:"Web Mapping Application"',
       sortField: "modified",
@@ -63,7 +63,7 @@
   <div class="progressBar" bind:this={progressBarNode} />
   <div class="itemsWrapper">
     <!-- `https://www.arcgis.com/home/item.html?id=${item.id}` -->
-    {#each items as item}
+    {#each items as item (item.id + "-" + item.uniqueId)}
       <Item {item} />
     {/each}
   </div>
