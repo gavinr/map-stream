@@ -28,7 +28,6 @@
       /></a
     >
   {/if}
-  Title:
   <a
     href={`https://www.arcgis.com/apps/mapviewer/index.html?webmap=${item.id}`}
     target="_blank">{item.title}</a
