@@ -16,19 +16,21 @@
    */
   const mergeItems = (newItems) => {
     if (items && items.length > 0) {
-      const itemsToInsert = [];
-      const currentFirstId = items[0].modified;
-      newItems.find((item) => {
-        if (item.modified === currentFirstId) {
-          return true;
-        } else {
-          item.uniqueId = Math.random();
-          itemsToInsert.push(item);
-          return false;
-        }
-      });
+      // item hash is ID + modified date
+      const itemHashes = new Set(
+        items.map((item) => {
+          return `${item.id}-${item.modified}`;
+        })
+      );
 
-      items = [...itemsToInsert, ...items];
+      newItems = newItems.map((item) => {
+        const hash = `${item.id}-${item.modified}`;
+        if (!itemHashes.has(hash)) {
+          item.new = true;
+        }
+        return item;
+      });
+      items = newItems;
     } else {
       items = newItems;
     }
@@ -39,6 +41,7 @@
       q: '((type: "Web Map")) AND NOT type:"Web Mapping Application"',
       sortField: "modified",
       sortOrder: "desc",
+      num: 50,
     };
     const searchItemsResults = await searchItems(searchOptions);
     mergeItems(searchItemsResults.results);
@@ -63,7 +66,7 @@
   <div class="progressBar" bind:this={progressBarNode} />
   <div class="itemsWrapper">
     <!-- `https://www.arcgis.com/home/item.html?id=${item.id}` -->
-    {#each items as item (item.id + "-" + item.uniqueId)}
+    {#each items as item (item.id + item.modified)}
       <Item {item} />
     {/each}
   </div>

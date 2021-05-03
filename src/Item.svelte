@@ -1,18 +1,23 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { fade, fly } from "svelte/transition";
   import type { IItem } from "@esri/arcgis-rest-portal";
 
   export let item: IItem;
-  let itemNode;
+  let dateString = "";
 
-  onMount(() => {
-    setTimeout(() => {
-      itemNode.classList.add("old");
-    }, 1500);
-  });
+  $: {
+    const itemDate = new Date(item.modified);
+    dateString = `${itemDate.getHours()}:${String(
+      itemDate.getMinutes()
+    ).padStart(2, "0")}:${String(itemDate.getSeconds()).padStart(2, "0")}`;
+  }
 </script>
 
-<div class="item" bind:this={itemNode}>
+<div
+  class="item"
+  class:new={item.new === true}
+  in:fly={{ y: -200, duration: 1000 }}
+>
   {#if item.thumbnail}
     <a
       href={`https://www.arcgis.com/apps/mapviewer/index.html?webmap=${item.id}`}
@@ -29,7 +34,12 @@
     target="_blank">{item.title}</a
   ><br />
   Owner: {item.owner}<br />
-  Modified: {new Date(item.modified)}
+  Modified: {dateString}<br />
+  {item.numViews.toLocaleString("en-US")} views<br />
+  {#if item.snippet}
+    <br /><br /><em>{item.snippet}</em>
+  {/if}
+
   <div class="clear" />
 </div>
 
@@ -38,8 +48,10 @@
     padding: 10px;
     border: 1px solid gray;
     margin: 10px;
-    background-color: salmon;
     transition: background-color 1s linear;
+  }
+  .item.new {
+    background-color: rgba(250, 128, 114, 0.3);
   }
   .item img {
     float: left;
