@@ -26,7 +26,3 @@ a:hover {
 a:visited {
   color: rgb(0, 80, 160);
 }
-
-.item.old {
-  background-color: transparent !important;
-}

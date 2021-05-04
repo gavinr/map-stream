@@ -2,12 +2,13 @@
   import UpdatingMapList from "./UpdatingMapList.svelte";
 </script>
 
-<main>
-  <h1>Map Stream</h1>
-  <div>
+<div class="grid-container">
+  <div class="column-24">
+    <h1>Map Stream</h1>
+
     <UpdatingMapList />
   </div>
-</main>
+</div>
 
 <style>
 </style>
