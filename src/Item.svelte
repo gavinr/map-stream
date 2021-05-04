@@ -51,12 +51,12 @@
     </p>
 
     <p class="font-size--3 trailer-half leader-quarter text-darker-gray">
-      <span class="inline-block margin-right-1 card-created"
-        >Owner: {item.owner}</span
-      >
       <span class="inline-block margin-right-1">Updated: {dateString}</span>
       <span class="inline-block margin-right-1"
         >View Count: {item.numViews.toLocaleString("en-US")} views</span
+      >
+      <span class="inline-block margin-right-1 card-created"
+        >Owner: {item.owner}</span
       >
     </p>
   </div>
