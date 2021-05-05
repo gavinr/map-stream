@@ -7,9 +7,10 @@
 
   $: {
     const itemDate = new Date(item.modified);
-    dateString = `${itemDate.getHours()}:${String(
-      itemDate.getMinutes()
-    ).padStart(2, "0")}:${String(itemDate.getSeconds()).padStart(2, "0")}`;
+
+    dateString = new Intl.DateTimeFormat([], {
+      timeStyle: "medium",
+    }).format(itemDate);
   }
 </script>
 

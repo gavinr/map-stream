@@ -18,7 +18,7 @@
         on:click={() => {
           Swal.fire({
             title: "About Map Stream",
-            html: `<p>This web app shows the most recently updated maps in ArcGIS Online. More info on <a href="https://github.com/gavinr/map-stream">GitHub</a>.</p>
+            html: `<p>This web app shows the most recently updated public web maps in ArcGIS Online. More info on <a href="https://github.com/gavinr/map-stream">GitHub</a>.</p>
               <p>Created by <a href="https://gavinr.com">Gavin Rehkemper</a>.</p>`,
             showCloseButton: true,
             showConfirmButton: false,
