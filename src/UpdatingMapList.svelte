@@ -1,12 +1,11 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import ProgressBar from "progressbar.js";
+  import { onMount, createEventDispatcher } from "svelte";
+  const dispatch = createEventDispatcher();
+
   import { searchItems } from "@esri/arcgis-rest-portal";
   import type { ISearchOptions, IItem } from "@esri/arcgis-rest-portal";
   import Item from "./Item.svelte";
 
-  let progressBarNode;
-  let progressBar;
   let items: IItem[];
   $: items = [];
 
@@ -48,22 +47,15 @@
 
     const duration = 10000;
     setTimeout(looper, duration);
-    progressBar.set(1);
-    progressBar.animate(0, {
-      duration: duration,
-    });
+    dispatch("resetTimer", duration);
   };
 
   onMount(async () => {
     looper();
-    progressBar = new ProgressBar.Circle(progressBarNode, {
-      strokeWidth: 6,
-    });
   });
 </script>
 
 <div>
-  <div class="progressBar" bind:this={progressBarNode} />
   <div class="itemsWrapper">
     <!-- `https://www.arcgis.com/home/item.html?id=${item.id}` -->
     {#each items as item (item.id + item.modified)}
@@ -75,10 +67,5 @@
 <style>
   .itemsWrapper {
     padding-top: 20px;
-  }
-  .progressBar {
-    float: right;
-    height: 20px;
-    width: 20px;
   }
 </style>
